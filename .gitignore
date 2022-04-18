@@ -1,0 +1,6 @@
+# production
+/build
+
+# dependencies
+/storybook-static
+/node_modules
