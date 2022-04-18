@@ -25,16 +25,9 @@ module.exports = {
     devServer: {
         static: {
             directory: path.resolve(__dirname, `${BuildFolder}`),
-            publicPath: `/`,
+            publicPath: `/`
         },
-        host: 'localhost',
-        port: 9090,
-        hot: true,
-        open: true,
-        historyApiFallback: true,
-        client: {
-            progress: true,
-        },
+        watchFiles: ["src/**/*"],
     },
     module: {
         rules: [
@@ -43,12 +36,12 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: 'source-map-loader',
+                        loader: 'source-map-loader'
                     },
                     {
-                        loader: 'babel-loader',
-                    },
-                ],
+                        loader: 'babel-loader'
+                    }
+                ]
             },
             {
                 test: /\.s[ac]ss$/i,
@@ -57,13 +50,13 @@ module.exports = {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                             publicPath: `/${BuildFolder}/`,
-                        },
+                        }
                     },
                     {
                         loader: "css-loader",
                         options: {
                             sourceMap: true,
-                        },
+                        }
                     },
                     {
                         loader: 'resolve-url-loader',
@@ -72,29 +65,26 @@ module.exports = {
                         loader: "sass-loader",
                         options: {
                             sourceMap: true,
-                        },
-                    },
-                ],
+                        }
+                    }
+                ]
             },
             {
                 test: /\.(png|jpe?g|gif)$/i,
                 type: 'asset',
                 generator: {
-                    filename: '../images/[name][ext][query]',
+                    filename: '../images/[name][ext][query]'
                 }
             },
             {
                 test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-                type: 'asset',
-                generator: {
-                    filename: '../fonts/[name][ext][query]',
-                }
-            },
-        ],
+                type: 'asset/inline'
+            }
+        ]
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: './css/[name].[contenthash].css',
+            filename: './css/[name].[contenthash].css'
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, `./public/${publicHtmlIndex}`),
@@ -107,29 +97,29 @@ module.exports = {
             assetNameRegExp: /\.optimize\.css$/g,
             cssProcessor: require('cssnano'),
             cssProcessorPluginOptions: {
-                preset: ['default', { discardComments: { removeAll: true } }],
+                preset: ['default', { discardComments: { removeAll: true } }]
             },
             canPrint: true
         }),
     ],
     optimization: {
         runtimeChunk: {
-            name: "runtime",
+            name: "runtime"
         },
         splitChunks: {
             cacheGroups: {
                 common: {
                     name: "main",
-                    test: /\.(ts|js)x?$/,
+                    test: /\.(ts|js)x?$/
                 },
                 vendor: {
                     name: "vendors",
                     test: /node_modules/,
                     chunks: "all",
                     enforce: false
-                },
-            },
-        },
+                }
+            }
+        }
     },
     devtool: 'inline-source-map',
 }
