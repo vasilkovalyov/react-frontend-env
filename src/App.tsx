@@ -4,6 +4,8 @@ import './assets/scss/main.scss'
 import Image from './assets/images/img.jpg'
 import Icon from './assets/images/Icon.svg'
 
+import Button from './components/Button'
+
 import axios from 'axios'
 
 export const App = () => {
@@ -20,6 +22,9 @@ export const App = () => {
       <img src={Image} alt="img alt" />
       <img src={Icon} alt="img alt" />
       <div className="icon-icon-file"></div>
+      <Button text={'Button'} />
+      <Button text={'Button Primary'} type="primary" />
+      <Button text={'Button Secondary'} type="secondary" />
       <button onClick={() => setCounter(counter + 10)}>
         Counter {counter}
       </button>
